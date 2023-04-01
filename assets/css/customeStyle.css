@@ -1,0 +1,10 @@
+#btnAddBrand {
+	background-color: rgb(240, 131, 29);
+	color: white;
+	font-weight: bold;
+}
+#redStar {
+	color: red;
+	font-weight: bolder;
+	margin-right: 4px;
+}
