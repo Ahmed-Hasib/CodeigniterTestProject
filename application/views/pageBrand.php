@@ -47,6 +47,7 @@
                     <table>
                         <tr>
                             <td>Brand Name <span id="redStar">* </span> </td>
+                            <input type="hidden" name="id" id="brandID">
                             <td><input type="text" class="form-control" name="name" required id="inputUpdateBrand" maxlength="50"></td>
                         </tr>
                         <tr>
@@ -61,13 +62,33 @@
     </div>
 </div>
 
+<!-- Delete Modal -->
+<!-- Modal -->
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body text-center">
+                <h6> Are You sure to delete the selected brand?</h6>
+            </div>
+            <div class="modal-footer h-100 d-flex align-items-center justify-content-center">
+                <a type="button" class="btn btn-danger" id="deleteBtn">Ok</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
 <br>
 
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h2>All Brands</h2>
+            <h2>All Brands <span class="text-danger"><?= $this->session->flashdata('deleteBrandStatus'); ?></span></h2>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -85,10 +106,14 @@
                             <td><?= $allBrands[$i]->name; ?></td>
                             <td><?= date('h:i:s a m/d/Y', strtotime($allBrands[$i]->entry_date)); ?></td>
                             <td>
-                                <button id="btnUpdateBrand" type="button" data-brandName="<?= $allBrands[$i]->name; ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                <button id="btnUpdateBrand" type="button" data-brandId="<?= $allBrands[$i]->id; ?>" data-brandName="<?= $allBrands[$i]->name; ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal">
                                     <li data-feather="edit"></li>
                                 </button>
-                                <i data-feather="trash"></i>
+
+                                <button type="button" class="btn" data-brandId="<?= $allBrands[$i]->id; ?>" data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                                    <i data-feather="trash"></i>
+                                </button>
+
                             </td>
                         </tr>
                     <?php }

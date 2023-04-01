@@ -39,7 +39,35 @@ class Brand extends CI_Controller
 
     function updateBrandPost()
     {
-        echo "<pre>";
-        print_r($_POST);
+        $updateStatus = false;
+
+        if (isset($_POST['id']) && isset($_POST['name'])) {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $brands = $this->M_brand->checkBrand($name);
+
+            if (count($brands) > 0) {
+                $updateStatus = "Brand exists";
+                foreach ($brands as $brand) {
+                    if ($brand->id == $id) {
+                        $updateStatus = $this->M_brand->updateBrand($id, $name);
+                    }
+                }
+            } else {
+                $updateStatus = $this->M_brand->updateBrand($id, $name);
+            }
+        }
+
+        echo $updateStatus;
+    }
+    function deleteBrand()
+    {
+        if (isset($_GET['id'])) {
+            $status = $this->M_brand->deleteBrand($_GET['id']);
+            if ($status) {
+                $this->session->set_flashdata('deleteBrandStatus', 'Brand deleted successfully');
+            }
+            redirect("brand");
+        }
     }
 }
