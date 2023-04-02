@@ -104,7 +104,7 @@
                         <tr>
                             <td><?= $i + 1; ?></td>
                             <td><?= $allBrands[$i]->name; ?></td>
-                            <td><?= date('d/m/Y', strtotime($allBrands[$i]->entry_date)); ?></td>
+                            <td><?= date('M d, Y', strtotime($allBrands[$i]->entry_date)); ?></td>
                             <td>
                                 <button id="btnUpdateBrand" type="button" data-brandId="<?= $allBrands[$i]->id; ?>" data-brandName="<?= $allBrands[$i]->name; ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal">
                                     <li data-feather="edit"></li>

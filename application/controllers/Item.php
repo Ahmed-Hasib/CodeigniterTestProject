@@ -46,4 +46,43 @@ class Item extends CI_Controller
         }
         echo $insertStatus;
     }
+
+    function updateItemPost()
+    {
+
+        $updateStatus = false;
+        if (isset($_POST['brand_id']) && isset($_POST['model_id']) && isset($_POST['id']) && isset($_POST['name'])) {
+
+            $brand_id = $_POST['brand_id'];
+            $model_id = $_POST['model_id'];
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $items = $this->M_item->checkItem($brand_id, $model_id, $name);
+            if (count($items) > 0) {
+                $updateStatus = "Item exists";
+                foreach ($items as $item) {
+                    if ($item->id == $id) {
+
+                        $updateStatus = $this->M_item->updateItem($id, $brand_id, $model_id, $name);
+                    }
+                }
+            } else {
+
+                $updateStatus = $this->M_item->updateItem($id, $brand_id, $model_id, $name);
+            }
+
+            echo $updateStatus;
+        }
+    }
+
+    function deleteModel()
+    {
+        if (isset($_GET['id'])) {
+            $status = $this->M_item->deleteItem($_GET['id']);
+            if ($status) {
+                $this->session->set_flashdata('deleteItemStatus', 'Item deleted successfully');
+            }
+            redirect("Item");
+        }
+    }
 }

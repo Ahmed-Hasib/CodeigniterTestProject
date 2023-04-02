@@ -74,9 +74,9 @@
             <div class="modal-body">
 
                 <p>Fields marked with <span id="redStar">*</span> are mandatory</p>
-                <p class="text-danger" id="errorShowUpdate"></p>
+                <p class="text-danger" id="errorShowUpdateItem"></p>
                 <hr>
-                <form action="<?= base_url('Model/updateModelPost'); ?>" method="POST" id="updateModelFrom">
+                <form action="<?= base_url('Item/updateItemPost'); ?>" method="POST" id="updateItemFrom">
                     <table>
                         <tr>
                             <td>Brand <span id="redStar">* </span> </td>
@@ -112,7 +112,7 @@
                         <tr>
                             <td>Item Name <span id="redStar">* </span> </td>
                             <input type="hidden" name="id" id="itemId">
-                            <td><input type="text" class="form-control" name="name" required id="inputUpdateModel" maxlength="50"></td>
+                            <td><input type="text" class="form-control" name="name" required id="inputUpdateItem" maxlength="50"></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -128,15 +128,15 @@
 
 <!-- Delete Modal -->
 <!-- Modal -->
-<div class="modal fade" id="DeleteModalModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="DeleteItemModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <div class="modal-body text-center">
-                <h6> Are You sure to delete the selected Model?</h6>
+                <h6> Are You sure to delete the selected Item?</h6>
             </div>
             <div class="modal-footer h-100 d-flex align-items-center justify-content-center">
-                <a type="button" class="btn btn-danger" id="deleteBtnModel">Ok</a>
+                <a type="button" class="btn btn-danger" id="deleteBtnItem">Ok</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
             </div>

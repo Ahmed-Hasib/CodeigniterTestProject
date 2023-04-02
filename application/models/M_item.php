@@ -44,13 +44,14 @@ class M_item extends CI_Model
         return $this->db->insert('items', $data);
     }
 
-    function updateModel($brand_id, $id, $name)
+    function updateItem($id, $brand_id, $model_id, $name)
     {
         $this->db->set('name', $name);
         $this->db->set('brand_id', $brand_id);
+        $this->db->set('model_id', $model_id);
         $this->db->where('id', $id);
 
-        return $this->db->update('models');
+        return $this->db->update('items');
     }
 
     // 
@@ -58,9 +59,9 @@ class M_item extends CI_Model
 
 
 
-    function deleteModel($id)
+    function deleteItem($id)
     {
         $this->db->where('id', $id);
-        return $this->db->delete('models');
+        return $this->db->delete('items');
     }
 }
