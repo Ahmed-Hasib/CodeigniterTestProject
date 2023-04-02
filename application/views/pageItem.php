@@ -1,9 +1,9 @@
-<!-- add ModelModal -->
-<div class="modal fade" id="addModelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- add itemModal -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-primary" id="exampleModalLabel">Add Model</h5>
+                <h5 class="modal-title text-primary" id="exampleModalLabel">Add Item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -11,12 +11,12 @@
                 <p>Fields marked with <span id="redStar">*</span> are mandatory</p>
                 <p class="text-danger" id="errorShow"></p>
                 <hr>
-                <form action="<?= base_url('Model/addModelPost'); ?>" method="POST" id="addModelFrom">
+                <form action="<?= base_url('Item/addItemPost'); ?>" method="POST" id="addItemFrom">
                     <table>
                         <tr>
                             <td>Brand <span id="redStar">* </span> </td>
                             <td>
-                                <select name="brand_id" id="brandSelect" class="form-select">
+                                <select name="brand_id" id="brandSelectItem" class="form-select ">
                                     <option value="-1">---- Select Brand ----</option>
                                     <?php
                                     if (isset($allBrands) && count($allBrands)) {
@@ -29,7 +29,23 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Model Name <span id="redStar">* </span> </td>
+                            <td>Model <span id="redStar">* </span> </td>
+                            <td>
+                                <select name="model_id" id="modelSelect" class="form-select">
+                                    <option value="-1">---- Select Model ----</option>
+                                    <?php
+                                    if (isset($allModels) && count($allModels)) {
+                                        foreach ($allModels as $model) { ?>
+                                            <option class="modelOption brandID_<?= $model->brand_id; ?>" value="<?= $model->id; ?>"><?= $model->name; ?></option>
+
+                                    <?php }
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Item Name <span id="redStar">* </span> </td>
                             <td><input type="text" class="form-control" name="name" required id="inputAddModel" maxlength="100"></td>
                         </tr>
                         <tr>
@@ -43,6 +59,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!--update brand Modal  -->
 
@@ -123,7 +141,8 @@
                 <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Name</th>
+                        <th>Item</th>
+                        <th>Model Name</th>
                         <th>Brand Name</th>
                         <th>Entry Date</th>
                         <th>Action</th>
@@ -131,18 +150,19 @@
                 </thead>
                 <tbody>
                     <?php
-                    for ($i = 0; $i < count($allModels); $i++) { ?>
+                    for ($i = 0; $i < count($allItems); $i++) { ?>
                         <tr>
                             <td><?= $i + 1; ?></td>
-                            <td><?= $allModels[$i]->name; ?></td>
-                            <td><?= $allModels[$i]->brand_name; ?></td>
-                            <td><?= date('h:i:s a m/d/Y', strtotime($allModels[$i]->entry_date)); ?></td>
+                            <td><?= $allItems[$i]->item_name; ?></td>
+                            <td><?= $allItems[$i]->model_name; ?></td>
+                            <td><?= $allItems[$i]->brand_name; ?></td>
+                            <td><?= date('h:i:s a m/d/Y', strtotime($allItems[$i]->entry_date)); ?></td>
                             <td>
-                                <button id="btnUpdateBrand" type="button" data-brandId="<?= $allModels[$i]->brand_id; ?>" data-ModelId=<?= $allModels[$i]->model_id; ?> data-ModelName="<?= $allModels[$i]->name; ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                <button id="btnUpdateItem" type="button" data-brandId="<?= $allItems[$i]->brand_id; ?>" data-ModelId=<?= $allItems[$i]->model_id; ?> data-ItemId=<?= $allItems[$i]->id; ?> data-ItemName="<?= $allItems[$i]->item_name; ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal">
                                     <li data-feather="edit"></li>
                                 </button>
 
-                                <button type="button" class="btn" data-ModelId="<?= $allModels[$i]->model_id; ?>" data-bs-toggle="modal" data-bs-target="#DeleteModalModel">
+                                <button type="button" class="btn" data-ItemId="<?= $allItems[$i]->id; ?>" data-bs-toggle="modal" data-bs-target="#DeleteItemModel">
                                     <i data-feather="trash"></i>
                                 </button>
 
@@ -156,7 +176,7 @@
                 </tbody>
             </table>
 
-            <button id="btnAddBrand" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addModelModal">Add Model</button>
+            <button id="btnAddBrand" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
 
         </div>
 

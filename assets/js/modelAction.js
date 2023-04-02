@@ -95,4 +95,19 @@ $(document).ready(function () {
 			$("#modelID").val(ModelId);
 		});
 	}
+
+	//delete model modal operation
+
+	//Delete brand
+	var DeleteModalModel = document.getElementById("DeleteModalModel");
+	if (DeleteModalModel != null) {
+		DeleteModalModel.addEventListener("show.bs.modal", function (event) {
+			// Button that triggered the modal
+			var button = event.relatedTarget;
+			// Extract info from data-bs-* attributes
+			var id = button.getAttribute("data-ModelId");
+			var url = "Model/deleteModel?id=" + id;
+			$("#deleteBtnModel").attr("href", url);
+		});
+	}
 });

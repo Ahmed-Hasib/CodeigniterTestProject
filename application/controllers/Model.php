@@ -61,4 +61,15 @@ class Model extends CI_Controller
             echo $updateStatus;
         }
     }
+
+    function deleteModel()
+    {
+        if (isset($_GET['id'])) {
+            $status = $this->M_model->deleteModel($_GET['id']);
+            if ($status) {
+                $this->session->set_flashdata('deleteModelStatus', 'Model deleted successfully');
+            }
+            redirect("Model");
+        }
+    }
 }
