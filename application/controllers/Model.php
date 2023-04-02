@@ -40,7 +40,25 @@ class Model extends CI_Controller
     }
     function updateModelPost()
     {
-        echo "<pre>";
-        print_r($_POST);
+
+        $updateStatus = false;
+        if (isset($_POST['brand_id']) && isset($_POST['id']) && isset($_POST['name'])) {
+            $brand_id = $_POST['brand_id'];
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $models = $this->M_model->checkModel($brand_id, $name);
+            if (count($models) > 0) {
+                $updateStatus = "Model exists";
+                foreach ($models as $model) {
+                    if ($model->id == $id) {
+                        $updateStatus = $this->M_model->updateModel($brand_id, $id, $name);
+                    }
+                }
+            } else {
+                $updateStatus = $this->M_model->updateModel($brand_id, $id, $name);
+            }
+
+            echo $updateStatus;
+        }
     }
 }

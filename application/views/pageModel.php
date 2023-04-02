@@ -56,14 +56,14 @@
             <div class="modal-body">
 
                 <p>Fields marked with <span id="redStar">*</span> are mandatory</p>
-                <p class="text-danger" id="errorShowUpdaet"></p>
+                <p class="text-danger" id="errorShowUpdate"></p>
                 <hr>
                 <form action="<?= base_url('Model/updateModelPost'); ?>" method="POST" id="updateModelFrom">
                     <table>
                         <tr>
                             <td>Brand <span id="redStar">* </span> </td>
                             <td>
-                                <select name="brand_id" id="brandSelect" class="form-select">
+                                <select name="brand_id" id="brandSelectUpdate" class="form-select">
                                     <option value="-1">---- Select Brand ----</option>
                                     <?php
                                     if (isset($allBrands) && count($allBrands)) {

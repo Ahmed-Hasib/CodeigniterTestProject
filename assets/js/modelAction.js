@@ -33,7 +33,44 @@ $(document).ready(function () {
 		}
 	});
 
-	//
+	////
+
+	// update Model method
+	$("#updateModelFrom").submit(function (e) {
+		e.preventDefault(); // avoid to execute the actual submit of the form.
+
+		$("#errorShowUpdate").empty();
+		var form = $(this);
+		var actionUrl = form.attr("action");
+		var brandId = $("#brandSelectUpdate").val();
+		var modelId = $("#modelID").val();
+		var modelName = $("#inputUpdateModel").val();
+
+		if (brandId == -1) {
+			$("#errorShowUpdate").html("Please Select Brand ");
+		} else if (modelName.match(/^[a-zA-Z0-9]+$/)) {
+			$.ajax({
+				type: "POST",
+				url: actionUrl,
+				data: form.serialize(), // serializes the form's elements.
+				success: function (data) {
+					//console.log(data);
+					if (data == 1) {
+						$("#updateModal").hide({
+							done: function () {
+								alert("Model has been updated successfully");
+								location.href = "Model";
+							},
+						});
+					} else {
+						$("#errorShowUpdate").html(data);
+					} // show response from the php script.
+				},
+			});
+		} else {
+			$("#errorShowUpdate").html("Model Name Must be alphanumeric characters");
+		}
+	});
 
 	//updatemodal Form post
 
@@ -47,12 +84,13 @@ $(document).ready(function () {
 			var modelName = button.getAttribute("data-ModelName");
 			var brandId = button.getAttribute("data-brandId");
 			var ModelId = button.getAttribute("data-ModelId");
-			console.log(modelName + " /" + brandId + "/" + ModelId);
+			//console.log(modelName + " /" + brandId + "/ModelId : " + ModelId);
 
-			$('#brandSelect option[value="' + brandId + '"]').attr(
+			$('#brandSelectUpdate option[value="' + brandId + '"]').attr(
 				"selected",
 				"selected"
 			);
+
 			$("#inputUpdateModel").val(modelName);
 			$("#modelID").val(ModelId);
 		});

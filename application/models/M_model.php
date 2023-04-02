@@ -33,25 +33,23 @@ class M_model extends CI_Model
         return $this->db->insert('models', $data);
     }
 
+    function updateModel($brand_id, $id, $name)
+    {
+        $this->db->set('name', $name);
+        $this->db->set('brand_id', $brand_id);
+        $this->db->where('id', $id);
+
+        return $this->db->update('models');
+    }
 
     // 
 
-    function checkBrand($name)
-    {
-        $this->db->where("name", $name);
-        return $this->db->get('Brand')->result();
-    }
 
 
-    function updateBrand($id, $name)
-    {
-        $this->db->set('name', $name);
-        $this->db->where('id', $id);
-        return $this->db->update('brand');
-    }
-    function deleteBrand($id)
+
+    function deleteModel($id)
     {
         $this->db->where('id', $id);
-        return $this->db->delete('brand');
+        return $this->db->delete('models');
     }
 }
