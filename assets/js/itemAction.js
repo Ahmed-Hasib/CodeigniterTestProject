@@ -4,12 +4,15 @@ $(document).ready(function () {
 		var brandId = "brandID_" + this.value;
 
 		$(".modelOption").show();
+
 		$(".modelOption").each(function (el, obj) {
 			var clssName = obj.attributes["class"].nodeValue.split(" ");
 			if (brandId != clssName[1]) {
 				$("." + clssName[1]).hide();
 			}
 		});
+
+		$("#modelSelect option:first").prop("selected", true).trigger("change");
 	});
 	//
 	// Add Model method
@@ -33,9 +36,9 @@ $(document).ready(function () {
 				data: form.serialize(), // serializes the form's elements.
 				success: function (data) {
 					if (data == 1) {
+						alert("Item has been added successfully");
 						$("#addItemModal").hide({
 							done: function () {
-								alert("Item has been added successfully");
 								location.href = "Item";
 							},
 						});
@@ -71,9 +74,9 @@ $(document).ready(function () {
 				data: form.serialize(), // serializes the form's elements.
 				success: function (data) {
 					if (data == 1) {
+						alert("Item has been Updated successfully");
 						$("#updateModalitem").hide({
 							done: function () {
-								alert("Item has been Updated successfully");
 								location.href = "Item";
 							},
 						});

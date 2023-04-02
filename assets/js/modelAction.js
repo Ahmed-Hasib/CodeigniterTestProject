@@ -17,9 +17,9 @@ $(document).ready(function () {
 				data: form.serialize(), // serializes the form's elements.
 				success: function (data) {
 					if (data == 1) {
+						alert("Model has been added successfully");
 						$("#addModelModal").hide({
 							done: function () {
-								alert("Model has been added successfully");
 								location.href = "Model";
 							},
 						});
@@ -56,9 +56,9 @@ $(document).ready(function () {
 				success: function (data) {
 					//console.log(data);
 					if (data == 1) {
+						alert("Model has been updated successfully");
 						$("#updateModal").hide({
 							done: function () {
-								alert("Model has been updated successfully");
 								location.href = "Model";
 							},
 						});

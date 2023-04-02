@@ -14,9 +14,9 @@ $(document).ready(function () {
 				data: form.serialize(), // serializes the form's elements.
 				success: function (data) {
 					if (data == 1) {
+						alert("Brand has been added successfully");
 						$("#exampleModal").hide({
 							done: function () {
-								alert("Brand has been added successfully");
 								location.href = "Brand";
 							},
 						});
@@ -49,9 +49,9 @@ $(document).ready(function () {
 				success: function (data) {
 					console.log(data);
 					if (data == 1) {
+						alert("Brand has been updated successfully");
 						$("#updateModal").hide({
 							done: function () {
-								alert("Brand has been updated successfully");
 								location.href = "Brand";
 							},
 						});

@@ -5,13 +5,15 @@ class M_model extends CI_Model
 {
     function getModel()
     {
-        $sql = "SELECT models.name,
-        brand.name as brand_name,
-        models.entry_date as entry_date,
-        brand.id as brand_id,
-        models.id as model_id FROM `models`,
-        brand WHERE brand.id=models.brand_id 
-        ORDER BY models.entry_date ASC";
+        // $sql = "SELECT models.name,
+        // brand.name as brand_name,
+        // models.entry_date as entry_date,
+        // brand.id as brand_id,
+        // models.id as model_id FROM `models`,
+        // brand WHERE brand.id=models.brand_id 
+        // ORDER BY models.entry_date ASC";
+
+        $sql = "SELECT models.name, brand.name as brand_name, models.entry_date as entry_date, brand.id as brand_id, models.id as model_id FROM models LEFT JOIN brand ON brand.id=models.brand_id ORDER BY models.entry_date ASC";
 
 
         return  $result = $this->db->query($sql)->result();
