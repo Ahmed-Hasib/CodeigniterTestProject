@@ -32,7 +32,6 @@ $(document).ready(function () {
 
 	// update brand method
 	$("#updateBrandFrom").submit(function (e) {
-		console.log("clicked");
 		e.preventDefault(); // avoid to execute the actual submit of the form.
 		e.stopImmediatePropagation();
 		$("#errorShowUpdaet").empty();

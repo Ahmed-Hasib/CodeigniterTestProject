@@ -136,7 +136,7 @@
                             <td><?= $i + 1; ?></td>
                             <td><?= $allModels[$i]->name; ?></td>
                             <td><?= $allModels[$i]->brand_name; ?></td>
-                            <td><?= date('h:i:s a m/d/Y', strtotime($allModels[$i]->entry_date)); ?></td>
+                            <td><?= date('d/m/Y', strtotime($allModels[$i]->entry_date)); ?></td>
                             <td>
                                 <button id="btnUpdateBrand" type="button" data-brandId="<?= $allModels[$i]->brand_id; ?>" data-ModelId=<?= $allModels[$i]->model_id; ?> data-ModelName="<?= $allModels[$i]->name; ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal">
                                     <li data-feather="edit"></li>

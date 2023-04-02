@@ -9,7 +9,7 @@
             <div class="modal-body">
 
                 <p>Fields marked with <span id="redStar">*</span> are mandatory</p>
-                <p class="text-danger" id="errorShow"></p>
+                <p class="text-danger" id="errorShowitem"></p>
                 <hr>
                 <form action="<?= base_url('Item/addItemPost'); ?>" method="POST" id="addItemFrom">
                     <table>
@@ -46,7 +46,7 @@
                         </tr>
                         <tr>
                             <td>Item Name <span id="redStar">* </span> </td>
-                            <td><input type="text" class="form-control" name="name" required id="inputAddModel" maxlength="100"></td>
+                            <td><input type="text" class="form-control" name="name" required id="inputAddModel" maxlength="250"></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -62,13 +62,13 @@
 
 
 
-<!--update brand Modal  -->
+<!--update item Modal  -->
 
-<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateModalitem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-primary" id="exampleModalLabel">Edit Brand</h5>
+                <h5 class="modal-title text-primary" id="exampleModalLabel">Edit Item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -94,8 +94,24 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Model Name <span id="redStar">* </span> </td>
-                            <input type="hidden" name="id" id="modelID">
+                            <td>Model <span id="redStar">* </span> </td>
+                            <td>
+                                <select name="model_id" id="modelSelectUpdate" class="form-select">
+                                    <option value="-1">---- Select Model ----</option>
+                                    <?php
+                                    if (isset($allModels) && count($allModels)) {
+                                        foreach ($allModels as $model) { ?>
+                                            <option class="modelOption brandID_<?= $model->brand_id; ?>" value="<?= $model->id; ?>"><?= $model->name; ?></option>
+
+                                    <?php }
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Item Name <span id="redStar">* </span> </td>
+                            <input type="hidden" name="id" id="itemId">
                             <td><input type="text" class="form-control" name="name" required id="inputUpdateModel" maxlength="50"></td>
                         </tr>
                         <tr>
@@ -136,7 +152,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h2>All Models <span class="text-danger"><?= $this->session->flashdata('deleteModelStatus'); ?></span></h2>
+            <h2>All Items <span class="text-danger"><?= $this->session->flashdata('deleteModelStatus'); ?></span></h2>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -156,9 +172,9 @@
                             <td><?= $allItems[$i]->item_name; ?></td>
                             <td><?= $allItems[$i]->model_name; ?></td>
                             <td><?= $allItems[$i]->brand_name; ?></td>
-                            <td><?= date('h:i:s a m/d/Y', strtotime($allItems[$i]->entry_date)); ?></td>
+                            <td><?= date('d/m/Y', strtotime($allItems[$i]->entry_date)); ?></td>
                             <td>
-                                <button id="btnUpdateItem" type="button" data-brandId="<?= $allItems[$i]->brand_id; ?>" data-ModelId=<?= $allItems[$i]->model_id; ?> data-ItemId=<?= $allItems[$i]->id; ?> data-ItemName="<?= $allItems[$i]->item_name; ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                <button id="btnUpdateItem" type="button" data-brandId="<?= $allItems[$i]->brand_id; ?>" data-ModelId=<?= $allItems[$i]->model_id; ?> data-ItemId=<?= $allItems[$i]->id; ?> data-ItemName="<?= $allItems[$i]->item_name; ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateModalitem">
                                     <li data-feather="edit"></li>
                                 </button>
 

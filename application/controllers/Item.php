@@ -29,9 +29,21 @@ class Item extends CI_Controller
         $this->load->view('pageItem');
         $this->load->view('include/footer');
     }
+
     function addItemPost()
     {
-        echo "<pre>";
-        print_r($_POST);
+        $insertStatus = false;
+        if (isset($_POST['brand_id']) && isset($_POST['name']) && isset($_POST['model_id'])) {
+            $brand_id = $_POST['brand_id'];
+            $itemName = $_POST['name'];
+            $model_id = $_POST['model_id'];
+            $status = $this->M_item->checkItem($brand_id, $model_id, $itemName);
+            if (count($status) > 0) {
+                $insertStatus = "Item already exists";
+            } else {
+                $insertStatus = $this->M_item->insertItem($_POST);
+            }
+        }
+        echo $insertStatus;
     }
 }

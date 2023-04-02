@@ -16,7 +16,7 @@ class M_item extends CI_Model
         brand,models 
         WHERE items.model_id=models.id 
         and items.brand_id=brand.id
-        ORDER BY models.entry_date DESC";
+        ORDER BY items.entry_date DESC";
 
 
         return  $result = $this->db->query($sql)->result();
@@ -31,16 +31,17 @@ class M_item extends CI_Model
 
 
 
-    function checkModel($id, $model_name)
+    function checkItem($brand_id, $model_id, $itemName)
     {
 
-        $this->db->where("brand_id", $id);
-        $this->db->where("name", $model_name);
-        return $this->db->get('models')->result();
+        $this->db->where("model_id", $model_id);
+        $this->db->where("brand_id", $brand_id);
+        $this->db->where("name", $itemName);
+        return $this->db->get('items')->result();
     }
-    function insertModel($data)
+    function insertItem($data)
     {
-        return $this->db->insert('models', $data);
+        return $this->db->insert('items', $data);
     }
 
     function updateModel($brand_id, $id, $name)
